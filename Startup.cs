@@ -50,7 +50,7 @@ namespace MvcMovie
 
                 .AddOtlpExporter(otlpOptions =>
                 {
-                    otlpOptions.Endpoint = new Uri("http://40.78.131.7:4317");
+                    otlpOptions.Endpoint = new Uri("http://ec2-3-144-142-70.us-east-2.compute.amazonaws.com:4317");
                     otlpOptions.ExportProcessorType = ExportProcessorType.Simple;
                 }));
              

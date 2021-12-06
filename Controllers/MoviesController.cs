@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MvcMovie.Data;
 using MvcMovie.Models;
+using System.Net.Sockets;
 
 namespace MvcMovie.Controllers
 {
@@ -47,17 +48,26 @@ namespace MvcMovie.Controllers
         // GET: Movies/Create
         public IActionResult Create()
         {
-            HttpWebRequest myHttpWebRequest1 =
-              (HttpWebRequest)WebRequest.Create("https://shabuhabs-foo.azurewebsites.net/api/Foo?name=" + "Batman");
+            try {
+                 HttpWebRequest myHttpWebRequest1 =
+                 (HttpWebRequest)WebRequest.Create("https://shabuhabs-foo.azurewebsites.net/api/Foo?name=" + "Batman");
 
-            myHttpWebRequest1.KeepAlive = false;
-            // Assign the response object of HttpWebRequest to a HttpWebResponse variable.
-            HttpWebResponse myHttpWebResponse1 =
-              (HttpWebResponse)myHttpWebRequest1.GetResponse();
+                myHttpWebRequest1.KeepAlive = false;
+                 //  Assign the response object of HttpWebRequest to a HttpWebResponse variable.
+                 HttpWebResponse myHttpWebResponse1 =
+                (HttpWebResponse)myHttpWebRequest1.GetResponse();
 
-            Console.WriteLine("\nThe HTTP request Headers for the first request are: \n{0}", myHttpWebRequest1.Headers);
+                 Console.WriteLine("\nThe HTTP request Headers for the first request are: \n{0}", myHttpWebRequest1.Headers);
+  
+            } catch (Exception e) 
+            {
 
-            return View();
+                // Extract some information from this exception, and then
+                // throw it to the parent method.
+                if (e.Source != null)
+                    Console.WriteLine("IOException source: {0}", e.Source);
+            }
+             return View();
         }
 
         // POST: Movies/Create
